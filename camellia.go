@@ -288,33 +288,23 @@ func (c *camelliaCipher) BlockSize() int {
 
 func f(fin, ke uint64) uint64 {
 	var x uint64
-	var t1, t2, t3, t4, t5, t6, t7, t8 uint8
-	var y1, y2, y3, y4, y5, y6, y7, y8 uint8
 	x = fin ^ ke
-	t1 = uint8(x >> 56)
-	t2 = uint8(x >> 48)
-	t3 = uint8(x >> 40)
-	t4 = uint8(x >> 32)
-	t5 = uint8(x >> 24)
-	t6 = uint8(x >> 16)
-	t7 = uint8(x >> 8)
-	t8 = uint8(x)
-	t1 = sbox1[t1]
-	t2 = sbox2[t2]
-	t3 = sbox3[t3]
-	t4 = sbox4[t4]
-	t5 = sbox2[t5]
-	t6 = sbox3[t6]
-	t7 = sbox4[t7]
-	t8 = sbox1[t8]
-	y1 = t1 ^ t3 ^ t4 ^ t6 ^ t7 ^ t8
-	y2 = t1 ^ t2 ^ t4 ^ t5 ^ t7 ^ t8
-	y3 = t1 ^ t2 ^ t3 ^ t5 ^ t6 ^ t8
-	y4 = t2 ^ t3 ^ t4 ^ t5 ^ t6 ^ t7
-	y5 = t1 ^ t2 ^ t6 ^ t7 ^ t8
-	y6 = t2 ^ t3 ^ t5 ^ t7 ^ t8
-	y7 = t3 ^ t4 ^ t5 ^ t6 ^ t8
-	y8 = t1 ^ t4 ^ t5 ^ t6 ^ t7
+	t1 := sbox1[uint8(x>>56)]
+	t2 := sbox2[uint8(x>>48)]
+	t3 := sbox3[uint8(x>>40)]
+	t4 := sbox4[uint8(x>>32)]
+	t5 := sbox2[uint8(x>>24)]
+	t6 := sbox3[uint8(x>>16)]
+	t7 := sbox4[uint8(x>>8)]
+	t8 := sbox1[uint8(x)]
+	y1 := t1 ^ t3 ^ t4 ^ t6 ^ t7 ^ t8
+	y2 := t1 ^ t2 ^ t4 ^ t5 ^ t7 ^ t8
+	y3 := t1 ^ t2 ^ t3 ^ t5 ^ t6 ^ t8
+	y4 := t2 ^ t3 ^ t4 ^ t5 ^ t6 ^ t7
+	y5 := t1 ^ t2 ^ t6 ^ t7 ^ t8
+	y6 := t2 ^ t3 ^ t5 ^ t7 ^ t8
+	y7 := t3 ^ t4 ^ t5 ^ t6 ^ t8
+	y8 := t1 ^ t4 ^ t5 ^ t6 ^ t7
 	return uint64(y1)<<56 | uint64(y2)<<48 | uint64(y3)<<40 | uint64(y4)<<32 | uint64(y5)<<24 | uint64(y6)<<16 | uint64(y7)<<8 | uint64(y8)
 }
 
