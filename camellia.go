@@ -172,7 +172,7 @@ func New(key []byte) (*camelliaCipher, error) {
 
 func (c *camelliaCipher) Encrypt(dst, src []byte) {
 
-	d1 := binary.BigEndian.Uint64(src[:8])
+	d1 := binary.BigEndian.Uint64(src[0:])
 	d2 := binary.BigEndian.Uint64(src[8:])
 
 	d1 ^= c.kw[1]
@@ -222,14 +222,14 @@ func (c *camelliaCipher) Encrypt(dst, src []byte) {
 	d2 = d2 ^ c.kw[3]
 	d1 = d1 ^ c.kw[4]
 
-	binary.BigEndian.PutUint64(dst, d2)
+	binary.BigEndian.PutUint64(dst[0:], d2)
 	binary.BigEndian.PutUint64(dst[8:], d1)
 }
 
 func (c *camelliaCipher) Decrypt(dst, src []byte) {
 
+	d2 := binary.BigEndian.Uint64(src[0:])
 	d1 := binary.BigEndian.Uint64(src[8:])
-	d2 := binary.BigEndian.Uint64(src[:8])
 
 	d1 = d1 ^ c.kw[4]
 	d2 = d2 ^ c.kw[3]
@@ -278,7 +278,7 @@ func (c *camelliaCipher) Decrypt(dst, src []byte) {
 	d2 ^= c.kw[2]
 	d1 ^= c.kw[1]
 
-	binary.BigEndian.PutUint64(dst, d1)
+	binary.BigEndian.PutUint64(dst[0:], d1)
 	binary.BigEndian.PutUint64(dst[8:], d2)
 }
 
