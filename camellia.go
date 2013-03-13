@@ -1,12 +1,25 @@
-package camellia
+// Copyright (c) 2013 Damian Gryski <damian@gryski.com>
+// Licensed under the GPLv3 or, at your option, any later version.
 
-// http://tools.ietf.org/html/rfc3713
+/*
+   go-camellia is an implementation of the CAMELLIA encryption algorithm.
+   This is an unoptimized version based on the description in RFC3713.
+
+   References:
+   http://en.wikipedia.org/wiki/Camellia_(cipher)
+   http://tools.ietf.org/html/rfc3713
+   https://info.isl.ntt.co.jp/crypt/eng/camellia/
+*/
+
+package camellia
 
 import (
 	"crypto/cipher"
 	"encoding/binary"
 	"strconv"
 )
+
+const BlockSize = 16
 
 type KeySizeError int
 
@@ -60,7 +73,9 @@ func rotl8(k byte, rot uint) byte {
 	return (k << rot) | (k >> (8 - rot))
 }
 
-func New(key []byte) (*camelliaCipher, error) {
+// New creates and returns a new cipher.Block.
+// The key argument should be 16, 24, or 32 bytes.
+func New(key []byte) (cipher.Block, error) {
 
 	klen := len(key)
 	switch klen {
@@ -283,7 +298,7 @@ func (c *camelliaCipher) Decrypt(dst, src []byte) {
 }
 
 func (c *camelliaCipher) BlockSize() int {
-	return 16
+	return BlockSize
 }
 
 func f(fin, ke uint64) uint64 {

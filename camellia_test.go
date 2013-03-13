@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// from http://tools.ietf.org/html/rfc3713
+// Test vectors from http://tools.ietf.org/html/rfc3713
 var camelliaTests = []struct {
 	key    []byte
 	plain  []byte
