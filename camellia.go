@@ -10,7 +10,6 @@
    http://tools.ietf.org/html/rfc3713
    https://info.isl.ntt.co.jp/crypt/eng/camellia/
 */
-
 package camellia
 
 import (
