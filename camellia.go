@@ -2,12 +2,12 @@
 // Licensed under the GPLv3 or, at your option, any later version.
 
 /*
-   go-camellia is an implementation of the CAMELLIA encryption algorithm.
-   This is an unoptimized version based on the description in RFC3713.
+   go-camellia is an implementation of the CAMELLIA encryption algorithm
+   ( http://en.wikipedia.org/wiki/Camellia_%28cipher%29 ).
+
+   This is an unoptimized version based on the description in RFC 3713.
 
    References:
-   http://en.wikipedia.org/wiki/Camellia_(cipher)
-   http://tools.ietf.org/html/rfc3713
    https://info.isl.ntt.co.jp/crypt/eng/camellia/
 */
 package camellia
