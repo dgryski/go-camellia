@@ -2,7 +2,6 @@ package camellia
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
 )
 
@@ -71,17 +70,12 @@ func TestCamellia(t *testing.T) {
 		var b [16]byte
 		c.Encrypt(b[:], tt.plain)
 		if !bytes.Equal(b[:], tt.cipher) {
-			fmt.Printf("got : % 02x\n", b)
-			fmt.Printf("want: % 02x\n", tt.plain)
-			t.Errorf("encrypt failed")
+                        t.Errorf("encrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.plain)
 		}
 
 		c.Decrypt(b[:], tt.cipher)
 		if !bytes.Equal(b[:], tt.plain) {
-			fmt.Printf("got : % 02x\n", b)
-			fmt.Printf("want: % 02x\n", tt.plain)
-			t.Errorf("decrypt failed")
-
+                        t.Errorf("decrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.plain)
 		}
 	}
 }
