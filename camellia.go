@@ -1,13 +1,13 @@
 // Copyright (c) 2013 Damian Gryski <damian@gryski.com>
 // Licensed under the GPLv3 or, at your option, any later version.
 
+// Package camellia is an implementation of the CAMELLIA encryption algorithm
 /*
-   go-camellia is an implementation of the CAMELLIA encryption algorithm
-   ( http://en.wikipedia.org/wiki/Camellia_%28cipher%29 ).
 
    This is an unoptimized version based on the description in RFC 3713.
 
    References:
+   http://en.wikipedia.org/wiki/Camellia_%28cipher%29
    https://info.isl.ntt.co.jp/crypt/eng/camellia/
 */
 package camellia
