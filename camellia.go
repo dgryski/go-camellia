@@ -365,4 +365,4 @@ var sbox2 [256]byte
 var sbox3 [256]byte
 var sbox4 [256]byte
 
-var _ = cipher.Block(&camelliaCipher{})
+var _ cipher.Block = &camelliaCipher{}
