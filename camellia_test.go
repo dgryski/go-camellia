@@ -70,12 +70,12 @@ func TestCamellia(t *testing.T) {
 		var b [16]byte
 		c.Encrypt(b[:], tt.plain)
 		if !bytes.Equal(b[:], tt.cipher) {
-                        t.Errorf("encrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.plain)
+			t.Errorf("encrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.cipher)
 		}
 
 		c.Decrypt(b[:], tt.cipher)
 		if !bytes.Equal(b[:], tt.plain) {
-                        t.Errorf("decrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.plain)
+			t.Errorf("decrypt failed:\ngot : % 02x\nwant: % 02x", b, tt.plain)
 		}
 	}
 }
