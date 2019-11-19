@@ -15,6 +15,7 @@ package camellia
 import (
 	"crypto/cipher"
 	"encoding/binary"
+	"math/bits"
 	"strconv"
 )
 
@@ -45,9 +46,9 @@ const (
 func init() {
 	// initialize other sboxes
 	for i := range sbox1 {
-		sbox2[i] = rotl8(sbox1[i], 1)
-		sbox3[i] = rotl8(sbox1[i], 7)
-		sbox4[i] = sbox1[rotl8(uint8(i), 1)]
+		sbox2[i] = bits.RotateLeft8(sbox1[i], 1)
+		sbox3[i] = bits.RotateLeft8(sbox1[i], 7)
+		sbox4[i] = sbox1[bits.RotateLeft8(uint8(i), 1)]
 	}
 }
 
@@ -62,14 +63,6 @@ func rotl128(k [2]uint64, rot uint) (hi, lo uint64) {
 	hi = (k[0] << rot) | (k[1] >> (64 - rot))
 	lo = (k[1] << rot) | t
 	return hi, lo
-}
-
-func rotl32(k uint32, rot uint) uint32 {
-	return (k << rot) | (k >> (32 - rot))
-}
-
-func rotl8(k byte, rot uint) byte {
-	return (k << rot) | (k >> (8 - rot))
 }
 
 // New creates and returns a new cipher.Block.
@@ -327,7 +320,7 @@ func fl(flin, ke uint64) uint64 {
 	x2 := uint32(flin & 0xffffffff)
 	k1 := uint32(ke >> 32)
 	k2 := uint32(ke & 0xffffffff)
-	x2 = x2 ^ rotl32(x1&k1, 1)
+	x2 = x2 ^ bits.RotateLeft32(x1&k1, 1)
 	x1 = x1 ^ (x2 | k2)
 	return uint64(x1)<<32 | uint64(x2)
 }
@@ -338,7 +331,7 @@ func flinv(flin, ke uint64) uint64 {
 	k1 := uint32(ke >> 32)
 	k2 := uint32(ke & 0xffffffff)
 	y1 = y1 ^ (y2 | k2)
-	y2 = y2 ^ rotl32(y1&k1, 1)
+	y2 = y2 ^ bits.RotateLeft32(y1&k1, 1)
 	return uint64(y1)<<32 | uint64(y2)
 }
 

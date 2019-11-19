@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # to run the full verification suite:
-# curl http://info.isl.ntt.co.jp/crypt/eng/camellia/dl/cryptrec/t_camellia.txt |perl ./t_camellia.pl >cfull_test.go
+# curl -A Mozilla https://info.isl.ntt.co.jp/crypt/eng/camellia/dl/cryptrec/t_camellia.txt |perl ./t_camellia.pl >cfull_test.go
 # perl -pi -e 's/range camelliaTests/$&Full/' camellia_test.go
 # go test
 
