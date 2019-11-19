@@ -1,6 +1,3 @@
-// Copyright (c) 2013 Damian Gryski <damian@gryski.com>
-// Licensed under the GPLv3 or, at your option, any later version.
-
 // Package camellia is an implementation of the CAMELLIA encryption algorithm
 /*
 
